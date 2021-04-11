@@ -146,24 +146,24 @@ namespace Formulář_s_validací
             get { return _BirthYearAlertContent; }
             set
             {
-               if (emp.BirthYear > DateTime.Now.Year)
+                if (emp.BirthYear > DateTime.Now.Year)
+                {
                     _BirthYearAlertContent = "Ještě jsi se nenarodil :)";
+                    BirthYearAlertVisibility = Visibility.Visible;
+                }
+                else
+                {
+                    BirthYearAlertVisibility = Visibility.Hidden;
+                }
                 if (PropertyChanged != null)
                     PropertyChanged(this, new PropertyChangedEventArgs("BirthYearAlertContent"));
             }
         }
         private void BirthYearBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            try
-            {
-                Convert.ToInt32(emp.BirthYear);
-                BirthYearAlertVisibility = Visibility.Hidden;
-            }
-            catch
-            {
-                BirthYearAlertVisibility = Visibility.Visible;
-            }
             BirthYearAlertContent = "cokoliv";
+            if(BirthYearBox.Text == "")
+                BirthYearAlertVisibility = Visibility.Visible;
         }
         #endregion
         #region Education
